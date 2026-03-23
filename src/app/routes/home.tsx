@@ -1,4 +1,4 @@
-import { Plugin } from "~/components/Plugin";
+import { Plugin } from "~/components/plugin";
 import type { PluginEntry } from "~/types/protoRegistry";
 import type { Route } from "./+types/home";
 
@@ -25,7 +25,10 @@ export default function Home({ loaderData }: Route.ComponentProps) {
 		<div className="flex flex-1 flex-col gap-4 p-4">
 			<div className="grid auto-rows-min gap-4 md:grid-cols-2 sm:grid-cols-1">
 				{plugins.map((plugin, _index) => (
-					<Plugin key={`${plugin.id}-${plugin.author}-${plugin.name}`} plugin={plugin}></Plugin>
+					<Plugin
+						key={`${plugin.id}-${plugin.author}-${plugin.name}`}
+						plugin={plugin}
+					></Plugin>
 				))}
 			</div>
 		</div>
