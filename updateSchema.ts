@@ -23,9 +23,9 @@ const style: Options["style"] = {
 async function main() {
 	process.loadEnvFile(".env");
 
-	const baseUrl = process.env.DEV_URL_BASE;
+	const baseUrl = process.env.VITE_URL_BASE;
 	if (!baseUrl?.length) {
-		throw new Error("`DEV_URL_BASE` not set in .env.");
+		throw new Error("`VITE_URL_BASE` not set in .env.");
 	}
 
 	const schemaUrl = `${baseUrl}/schema.json`;

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@react-hook/copy':
+        specifier: ^2.0.1
+        version: 2.0.1(react@19.2.4)
       '@react-router/node':
         specifier: 7.13.1
         version: 7.13.1(react-router@7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(typescript@5.9.3)
@@ -24,8 +27,8 @@ importers:
         specifier: ^5.1.36
         version: 5.1.36
       lucide-react:
-        specifier: ^0.577.0
-        version: 0.577.0(react@19.2.4)
+        specifier: 1.0.0-rc.1
+        version: 1.0.0-rc.1(react@19.2.4)
       radix-ui:
         specifier: ^1.4.3
         version: 1.4.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -1261,6 +1264,11 @@ packages:
   '@radix-ui/rect@1.1.1':
     resolution: {integrity: sha512-HPwpGIzkl28mWyZqG52jiqDJ12waP11Pa1lGoiyUkIEuMLBP0oeK/C89esbXrxsky5we7dfd8U58nm0SgAWpVw==}
 
+  '@react-hook/copy@2.0.1':
+    resolution: {integrity: sha512-GokUQqGRgc9u5wmPPsMumUOHpdh5cqhWZR9ZdVAzsIvb3f4of7g70ggncZSsaSTNhn0oVO7YXFvdySwycJx+ow==}
+    peerDependencies:
+      react: '>=16.8'
+
   '@react-router/dev@7.13.1':
     resolution: {integrity: sha512-H+kEvbbOaWGaitOyL6CgqPsHqRUh66HuVRvIEaZEqdoAY/1xChdhmmq6ZumMHzcFHgHlfOcoXgNHlz6ZO4NWcg==}
     engines: {node: '>=20.0.0'}
@@ -2408,8 +2416,8 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  lucide-react@0.577.0:
-    resolution: {integrity: sha512-4LjoFv2eEPwYDPg/CUdBJQSDfPyzXCRrVW1X7jrx/trgxnxkHFjnVZINbzvzxjN70dxychOfg+FTYwBiS3pQ5A==}
+  lucide-react@1.0.0-rc.1:
+    resolution: {integrity: sha512-lJEa0jq6KTjpACE/uNPlSuB/nS9edOTJ6KZ7VSu7VuLq6OFa2jM1W3C83+yfMutAE/K+xwGSBBIZ57PkgSxV/Q==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -4435,6 +4443,10 @@ snapshots:
 
   '@radix-ui/rect@1.1.1': {}
 
+  '@react-hook/copy@2.0.1(react@19.2.4)':
+    dependencies:
+      react: 19.2.4
+
   '@react-router/dev@7.13.1(@react-router/serve@7.13.1(react-router@7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(typescript@5.9.3))(@types/node@22.19.15)(jiti@2.6.1)(lightningcss@1.32.0)(react-router@7.13.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(lightningcss@1.32.0)(tsx@4.21.0))':
     dependencies:
       '@babel/core': 7.29.0
@@ -5486,7 +5498,7 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lucide-react@0.577.0(react@19.2.4):
+  lucide-react@1.0.0-rc.1(react@19.2.4):
     dependencies:
       react: 19.2.4
 
