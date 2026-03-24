@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Pagination from "~/components/pagination";
-import { Plugin } from "~/components/plugin";
+import { Plugin } from "~/components/plugin/plugin";
 import type { PluginEntry } from "~/types/protoRegistry";
 import type { Route } from "./+types/home";
 
