@@ -51,7 +51,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 									Proto Plugins
 								</a>
 								<div className="flex items-center gap-2">
-									<a href="https://github.com/kdomasze/proto-plugins">
+									<a href="https://github.com/kdomasze/proto-plugins-viewer">
 										<Button variant="outline" size="icon">
 											<i className="devicon-github-original"></i>
 										</Button>
