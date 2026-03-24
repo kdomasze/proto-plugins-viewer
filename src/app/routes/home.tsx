@@ -1,3 +1,5 @@
+import { useState } from "react";
+import Pagination from "~/components/pagination";
 import { Plugin } from "~/components/plugin";
 import type { PluginEntry } from "~/types/protoRegistry";
 import type { Route } from "./+types/home";
@@ -21,16 +23,45 @@ export async function clientLoader() {
 export default function Home({ loaderData }: Route.ComponentProps) {
 	const plugins = loaderData;
 
+	const countPerPage = 10;
+
+	const getPluginPage = (pageNum: number) => {
+		return plugins.slice(
+			pageNum * countPerPage,
+			pageNum * countPerPage + countPerPage,
+		);
+	};
+
+	const [pluginPage, updatePluginPage] = useState<PluginEntry[]>(
+		getPluginPage(0),
+	);
+
+	const onPageChange = (nextPage: number) => {
+		updatePluginPage(getPluginPage(nextPage));
+	};
+
 	return (
-		<div className="flex flex-1 flex-col gap-4 p-4">
-			<div className="grid auto-rows-min gap-4 md:grid-cols-2 sm:grid-cols-1">
-				{plugins.map((plugin, _index) => (
-					<Plugin
-						key={`${plugin.id}-${plugin.author}-${plugin.name}`}
-						plugin={plugin}
-					></Plugin>
-				))}
+		<>
+			<Pagination
+				itemCount={countPerPage}
+				total={plugins.length}
+				onPageChange={onPageChange}
+			/>
+			<div className="flex flex-1 flex-col gap-4 p-4">
+				<div className="grid auto-rows-min gap-4 md:grid-cols-2 sm:grid-cols-1">
+					{pluginPage.map((plugin, _index) => (
+						<Plugin
+							key={`${plugin.id}-${plugin.author}-${plugin.name}`}
+							plugin={plugin}
+						></Plugin>
+					))}
+				</div>
 			</div>
-		</div>
+			<Pagination
+				itemCount={countPerPage}
+				total={plugins.length}
+				onPageChange={onPageChange}
+			/>
+		</>
 	);
 }
