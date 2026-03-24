@@ -43,11 +43,17 @@ function DevIcon({
 	const iconClass = `devicon-${plugin.devicon}-plain`;
 
 	if (plugin.devicon) {
-		return <i className={twMerge(iconClass, "text-4xl", className)}></i>;
+		return (
+			<i className={twMerge(iconClass, "min-w-11 text-4xl", className)}></i>
+		);
 	}
 
 	return (
-		<BadgeQuestionMark size="40" strokeWidth="1.5" className={className} />
+		<BadgeQuestionMark
+			size="44"
+			strokeWidth="1.5"
+			className={twMerge("min-w-11", className)}
+		/>
 	);
 }
 
@@ -125,7 +131,7 @@ function LinkButton({
 
 export function Plugin({ plugin }: { plugin: PluginEntry }) {
 	return (
-		<Card key={plugin.id}>
+		<Card key={plugin.id} className="justify-between">
 			<CardHeader>
 				<span className="flex">
 					<DevIcon className="pr-2 pt-2" plugin={plugin}></DevIcon>
