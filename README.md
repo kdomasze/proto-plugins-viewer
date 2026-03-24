@@ -1,87 +1,128 @@
-# Welcome to React Router!
+# Proto Plugins
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A web application for browsing and discovering Proto plugins. Proto is a language-agnostic package manager and plugin system that enables developers to easily install, manage, and use development tools across different projects and environments.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Tech Stack
 
-## Features
+- **Frontend**: React 19 with React Router v7
+- **Styling**: Tailwind CSS v4 with shadcn/ui components
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **Package Manager**: pnpm
+- **Linting**: Biome
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Prerequisites
 
-## Getting Started
+Before setting up the project locally, ensure you have the following installed:
 
-### Installation
+- **Node.js**: Version 24.14.0 or later
+- **pnpm**: Version 10.32.1 or later
 
-Install the dependencies:
+> **Tip**: This project uses [`proto`](https://moonrepo.dev/proto) to specify exact versions. Run `proto use` to automatically set up the correct versions.
 
-```bash
-npm install
-```
+## Local Development
 
-### Development
-
-Start the development server with HMR:
+### 1. Clone the Repository
 
 ```bash
-npm run dev
+git clone <repository-url>
+cd proto-plugins
 ```
 
-Your application will be available at `http://localhost:5173`.
-
-## Building for Production
-
-Create a production build:
+### 2. Install Dependencies
 
 ```bash
-npm run build
+pnpm install
 ```
 
-## Deployment
+### 3. Environment Setup
 
-### Docker Deployment
+The application requires an environment variable to specify the base URL for fetching plugin data from a CDN:
 
-To build and run using Docker:
+#### Using raw.githack.com as CDN
+
+1. Go to <https://raw.githack.com/>
+2. Enter the GitHub file URL (`https://github.com/moonrepo/proto/blob/master/registry/data/third-party.json`)
+3. Get the generated production URL
+4. Truncate the URL to end at the `registry` directory
 
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+# Create a .env file in the root directory
+echo "VITE_URL_BASE=https://rawcdn.githack.com/moonrepo/proto/[commit-hash]/registry" > .env
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+### 4. Start Development Server
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
-
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
+```bash
+pnpm dev
 ```
 
-## Styling
+The application will be available at `http://localhost:5173`.
 
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
+### 5. Type Checking and Linting
 
----
+```bash
+# Run type checking
+pnpm typecheck
 
-Built with ❤️ using React Router.
+# Run linting
+pnpm lint
+
+# Run linting with auto-fix
+pnpm lint-and-fix
+```
+
+## Available Scripts
+
+- `pnpm dev` - Start the development server
+- `pnpm build` - Build the application for production
+- `pnpm typecheck` - Run TypeScript type checking
+- `pnpm lint` - Run Biome linting
+- `pnpm lint-and-fix` - Run Biome linting with auto-fix
+- `pnpm updateSchema` - Regenerate TypeScript types from JSON schema
+
+## Project Structure
+
+```text
+src/
+├── app/
+│   ├── routes/          # React Router routes
+│   ├── root.tsx         # Root component
+│   └── app.css          # Global styles
+├── components/
+│   ├── plugin/          # Plugin-related components
+│   └── ui/              # Reusable UI components
+├── types/
+│   └── protoRegistry.ts # TypeScript types for plugin registry
+└── lib/
+    └── utils.ts         # Utility functions
+```
+
+## Plugin Data
+
+The application loads plugin data from a JSON registry file. The schema for this data is defined in `src/types/protoRegistry.ts`. To update the schema:
+
+1. Modify the source JSON schema file
+2. Run `pnpm updateSchema` to regenerate TypeScript types
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run tests and linting (`pnpm typecheck && pnpm lint`)
+5. Commit your changes (`git commit -m 'Add some amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Related Links
+
+- [Proto Documentation](https://moonrepo.dev/docs/proto)
+- [Proto Plugin Development](https://moonrepo.dev/docs/guides/wasm-plugins)
+- [React Router v7](https://reactrouter.com/)
+- [shadcn/ui](https://ui.shadcn.com/)
+- [Tailwind CSS](https://tailwindcss.com/)

@@ -1,13 +1,67 @@
-import { Welcome } from "../welcome/welcome";
+import { useState } from "react";
+import Pagination from "~/components/pagination";
+import { Plugin } from "~/components/plugin/plugin";
+import type { PluginEntry } from "~/types/protoRegistry";
 import type { Route } from "./+types/home";
 
-export function meta({}: Route.MetaArgs) {
+export function meta() {
 	return [
-		{ title: "New React Router App" },
-		{ name: "description", content: "Welcome to React Router!" },
+		{ title: "Proto Plugins" },
+		{ name: "description", content: "List of all available Proto Plugins" },
 	];
 }
 
-export default function Home() {
-	return <Welcome />;
+export async function clientLoader() {
+	const res = await fetch(
+		`${import.meta.env.VITE_URL_BASE}/data/third-party.json`,
+	);
+	const manifest: { plugins: PluginEntry[] } = await res.json();
+
+	return manifest.plugins;
+}
+
+export default function Home({ loaderData }: Route.ComponentProps) {
+	const plugins = loaderData;
+
+	const countPerPage = 10;
+
+	const getPluginPage = (pageNum: number) => {
+		return plugins.slice(
+			pageNum * countPerPage,
+			pageNum * countPerPage + countPerPage,
+		);
+	};
+
+	const [pluginPage, updatePluginPage] = useState<PluginEntry[]>(
+		getPluginPage(0),
+	);
+
+	const onPageChange = (nextPage: number) => {
+		updatePluginPage(getPluginPage(nextPage));
+	};
+
+	return (
+		<>
+			<Pagination
+				itemCount={countPerPage}
+				total={plugins.length}
+				onPageChange={onPageChange}
+			/>
+			<div className="flex flex-1 flex-col gap-4 p-4">
+				<div className="grid auto-rows-min gap-4 md:grid-cols-2 sm:grid-cols-1">
+					{pluginPage.map((plugin, _index) => (
+						<Plugin
+							key={`${plugin.id}-${plugin.author}-${plugin.name}`}
+							plugin={plugin}
+						></Plugin>
+					))}
+				</div>
+			</div>
+			<Pagination
+				itemCount={countPerPage}
+				total={plugins.length}
+				onPageChange={onPageChange}
+			/>
+		</>
+	);
 }

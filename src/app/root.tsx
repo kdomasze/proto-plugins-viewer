@@ -7,8 +7,13 @@ import {
 	ScrollRestoration,
 } from "react-router";
 
+import { ThemeProvider } from "~/components/theme-provider";
+
 import type { Route } from "./+types/root";
 import "./app.css";
+import "~/styles/globals.css";
+import { ModeToggle } from "~/components/mode-toggle";
+import { Button } from "~/components/ui/button";
 
 export const links: Route.LinksFunction = () => [
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -29,11 +34,36 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+				<link
+					rel="stylesheet"
+					type="text/css"
+					href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css"
+				/>
 				<Meta />
 				<Links />
 			</head>
 			<body>
-				{children}
+				<ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+					<header className="bg-background mb-8">
+						<div className="max-w-7xl mx-auto w-full px-4 py-4 sm:px-6">
+							<nav className="w-full flex items-center h-fit justify-between">
+								<a href="/" className="text-2xl font-bold">
+									Proto Plugins
+								</a>
+								<div className="flex items-center gap-2">
+									<a href="https://github.com/kdomasze/proto-plugins-viewer">
+										<Button variant="outline" size="icon">
+											<i className="devicon-github-original"></i>
+										</Button>
+									</a>
+									<ModeToggle />
+								</div>
+							</nav>
+						</div>
+					</header>
+					<main>{children}</main>
+					<footer></footer>
+				</ThemeProvider>
 				<ScrollRestoration />
 				<Scripts />
 			</body>
@@ -43,6 +73,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
 	return <Outlet />;
+}
+
+export function HydrateFallback() {
+	return <div>Loading...</div>;
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
