@@ -9,10 +9,6 @@ import {
 } from "~/components/ui/card";
 import type { PluginEntry } from "~/types/protoRegistry";
 
-// TODO: add header
-// TODO: maybe more advanced pagination
-// TODO: github deploy
-
 import { AuthorBadge } from "./author-badge";
 import { CopyField } from "./copy-field";
 import { DevIcon } from "./dev-icon";
