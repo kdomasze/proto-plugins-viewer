@@ -47,7 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 					<header className="bg-background mb-8">
 						<div className="max-w-7xl mx-auto w-full px-4 py-4 sm:px-6">
 							<nav className="w-full flex items-center h-fit justify-between">
-								<a href="/" className="text-2xl font-bold">
+								<a href="/proto-plugins-viewer/" className="text-2xl font-bold">
 									Proto Plugins
 								</a>
 								<div className="flex items-center gap-2">
